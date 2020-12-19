@@ -22,7 +22,7 @@ isbn.verifyCheckDigit(); // false
 ## Constructor
 
 ```
-new ISBNVerify(isbn: string [, strict = false])
+new ISBN(isbn: string [, strict = false])
 ```
 
 ### Parameters

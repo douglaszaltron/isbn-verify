@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>ISBN Verify</title>
+		<link rel="stylesheet" href="assets/common.css" />
+		<style>
+			.source {
+				margin: 1em 0 2em;
+				padding: 1em;
+				border: 1px solid #999;
+			}
+
+			table {
+				border-collapse: collapse;
+			}
+
+			th,
+			td {
+				padding: 0.5em;
+				border: 1px solid #000;
+			}
+
+			th {
+				color: #000;
+				background-color: #eee;
+				font-weight: normal;
+				text-align: start;
+			}
+
+			input,
+			button {
+				box-sizing: border-box;
+				font: inherit;
+				outline-offset: 0;
+			}
+
+			input {
+				padding: 0.5em;
+			}
+
+			button {
+				padding: 0.5em 1em;
+			}
+
+			button::-moz-focus-inner {
+				padding: 0; /* for Firefox */
+				border: none; /* for Firefox */
+			}
+
+			.form td {
+				border: none;
+			}
+
+			.form td + td {
+				padding-left: 1em;
+			}
+
+			.result {
+				font-weight: bold;
+			}
+			.result.-success {
+				color: #090;
+				background-color: #fff;
+			}
+			.result.-fail {
+				color: #e00;
+				background-color: #fff;
+			}
+		</style>
+		<script type="module">
+			import ISBN from './ISBN.mjs';
+
+			const inputElement = document.getElementById('isbn-input');
+			const strictElement = document.getElementById('isbn-strict');
+			const checkButtonElement = document.getElementById('isbn-check');
+
+			const formatSeccessElement = document.getElementById('isbn-format-success');
+			const formatFailElement = document.getElementById('isbn-format-fail');
+
+			const digits13Element = document.getElementById('isbn-digits-13');
+			const digits10Element = document.getElementById('isbn-digits-10');
+
+			const cdSeccessElement = document.getElementById('isbn-cd-success');
+			const cdFailElement = document.getElementById('isbn-cd-fail');
+
+			inputElement.addEventListener('change', () => (inputElement.value = inputElement.value.trim()), { passive: true });
+
+			checkButtonElement.addEventListener(
+				'click',
+				() => {
+					const isbn = new ISBN(inputElement.value, strictElement.checked);
+
+					const format = isbn.verifyFormat();
+					formatSeccessElement.hidden = !format;
+					formatFailElement.hidden = format;
+
+					if (format) {
+						digits13Element.hidden = !isbn.isIsbn13();
+						digits10Element.hidden = !isbn.isIsbn10();
+
+						const checkDigit = isbn.verifyCheckDigit();
+						cdSeccessElement.hidden = !checkDigit;
+						cdFailElement.hidden = checkDigit;
+					} else {
+						digits13Element.hidden = true;
+						digits10Element.hidden = true;
+
+						cdSeccessElement.hidden = true;
+						cdFailElement.hidden = true;
+					}
+				},
+				{ passive: true }
+			);
+		</script>
+	</head>
+	<body>
+		<h1>ISBN Verify</h1>
+
+		<p class="source">
+			Source code: <a href="https://github.com/SaekiTominaga/isbn-verify/blob/main/ISBN.mjs.ts">src (TypeScript)</a>,
+			<a href="https://github.com/SaekiTominaga/isbn-verify/blob/main/ISBN.mjs">dist (JavaScript)</a>,
+			<a href="https://github.com/SaekiTominaga/isbn-verify/blob/main/__tests__/isbn.test.js">test (Jest)</a>
+		</p>
+
+		<p>Check if the ISBN value is correct, including the check digit.</p>
+
+		<table class="form">
+			<tbody>
+				<tr>
+					<td><label for="isbn-input">ISBN</label></td>
+					<td><input id="isbn-input" /></td>
+				</tr>
+				<tr>
+					<td><label for="isbn-strict">Strict mode</label></td>
+					<td><input type="checkbox" id="isbn-strict" /><label for="isbn-strict">(Syntax without hyphens will result in an error)</label></td>
+				</tr>
+			</tbody>
+		</table>
+		<p><button type="button" id="isbn-check">Check</button></p>
+
+		<section>
+			<h2>Result</h2>
+
+			<table>
+				<tbody>
+					<tr>
+						<th>Format</th>
+						<td>
+							<span class="result -success" id="isbn-format-success" hidden="">✓ Correct</span>
+							<span class="result -fail" id="isbn-format-fail" hidden="">✘ Incorrect</span>
+						</td>
+					</tr>
+					<tr>
+						<th>13 digits or 10 digits</th>
+						<td>
+							<span class="result" id="isbn-digits-13" hidden="">13 digits</span>
+							<span class="result" id="isbn-digits-10" hidden="">10 digits</span>
+						</td>
+					</tr>
+					<tr>
+						<th>Check digit</th>
+						<td>
+							<span class="result -success" id="isbn-cd-success" hidden="">✓ Correct</span>
+							<span class="result -fail" id="isbn-cd-fail" hidden="">✘ Incorrect</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section>
+			<h2>Correct example</h2>
+			<ul>
+				<li>978-4-06-519981-7</li>
+				<li>9784065199817</li>
+				<li>4-06-519981-6</li>
+				<li>4065199816</li>
+			</ul>
+		</section>
+
+		<section>
+			<h2>Incorrect example</h2>
+			<ul>
+				<li>978-4-06-519981-0 (Check digit is different)</li>
+				<li>97840651998170 (too many digits)</li>
+				<li>hogehoge (everything is useless)</li>
+			</ul>
+		</section>
+	</body>
+</html>

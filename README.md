@@ -36,7 +36,7 @@ new ISBN(isbn: string [, strict = false])
 
 ## Methods
 
-| Name | Rreturns | Description |
+| Name | Returns | Description |
 |-|-|-|
 | isValid() | {boolean} `true` if both format and check digit are correct | Alias of `verifyCheckDigit()` |
 | isIsbn13() | {boolean} `true` for current standard (13 digit) ISBN | Whether it is a 13-digit ISBN |

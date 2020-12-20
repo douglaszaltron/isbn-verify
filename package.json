@@ -50,5 +50,8 @@
 	"bugs": {
 		"url": "https://github.com/SaekiTominaga/isbn-verify/issues"
 	},
-	"homepage": "https://github.com/SaekiTominaga/isbn-verify#readme"
+	"homepage": "https://github.com/SaekiTominaga/isbn-verify#readme",
+	"publishConfig": {
+		"access": "public"
+	}
 }

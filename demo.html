@@ -3,14 +3,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>ISBN Verify</title>
-		<link rel="stylesheet" href="assets/common.css" />
 		<style>
-			.source {
-				margin: 1em 0 2em;
-				padding: 1em;
-				border: 1px solid #999;
-			}
-
 			table {
 				border-collapse: collapse;
 			}
@@ -69,7 +62,7 @@
 			}
 		</style>
 		<script type="module">
-			import ISBN from './ISBN.mjs';
+			import ISBN from './dist/ISBN.min.mjs';
 
 			const inputElement = document.getElementById('isbn-input');
 			const strictElement = document.getElementById('isbn-strict');
@@ -116,12 +109,6 @@
 	</head>
 	<body>
 		<h1>ISBN Verify</h1>
-
-		<p class="source">
-			Source code: <a href="https://github.com/SaekiTominaga/isbn-verify/blob/main/ISBN.mjs.ts">src (TypeScript)</a>,
-			<a href="https://github.com/SaekiTominaga/isbn-verify/blob/main/ISBN.mjs">dist (JavaScript)</a>,
-			<a href="https://github.com/SaekiTominaga/isbn-verify/blob/main/__tests__/isbn.test.js">test (Jest)</a>
-		</p>
 
 		<p>Check if the ISBN value is correct, including the check digit.</p>
 

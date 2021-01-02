@@ -1,4 +1,4 @@
-import ISBN from '../dist/ISBN.min.mjs';
+import ISBN from '../dist/ISBN.esm.js';
 
 describe('ISBN-13（ハイフンあり）', () => {
 	const isbn = new ISBN('978-4-06-519981-7');

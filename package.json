@@ -2,7 +2,35 @@
 	"name": "@saekitominaga/isbn-verify",
 	"version": "1.1.0",
 	"description": "Verify ISBN string format and check digit.",
+	"keywords": [
+		"ISBN"
+	],
+	"homepage": "https://github.com/SaekiTominaga/isbn-verify#readme",
+	"bugs": {
+		"url": "https://github.com/SaekiTominaga/isbn-verify/issues"
+	},
+	"license": "MIT",
+	"author": "Saeki Tominaga",
+	"files": [
+		"dist",
+		"src"
+	],
 	"type": "module",
+	"module": "dist/ISBN.js",
+	"types": "dist/ISBN.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SaekiTominaga/isbn-verify.git"
+	},
+	"scripts": {
+		"_build:tsc": "tsc -w",
+		"_build:compress": "onchange -f add -f change -v dist/ISBN.js -- brotlin compress dist/ISBN.js -m 1",
+		"_build:minify": "onchange -f add -f change -v dist/ISBN.js -- terser dist/ISBN.js -o dist/ISBN.min.js -c ecma=2020 --mangle --ecma 2020 --module --source-map content='dist/ISBN.js.map',filename='ISBN.js',includeSources,url='ISBN.min.js.map'",
+		"_build:minify-compress": "onchange -f add -f change -v dist/ISBN.min.js -- brotlin compress dist/ISBN.min.js -m 1",
+		"_build:minify-declaration": "onchange -f add -f change -v dist/ISBN.d.ts -- cpy dist/ISBN.d.ts dist --rename=ISBN.min.d.ts",
+		"build": "run-p _build:*",
+		"test": "jest"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.12.10",
 		"@babel/plugin-transform-modules-commonjs": "^7.12.1",
@@ -22,36 +50,12 @@
 		"terser": "^5.5.1",
 		"typescript": "^4.1.3"
 	},
-	"main": "dist/ISBN.esm.js",
-	"types": "dist/ISBN.esm.d.ts",
-	"scripts": {
-		"_ts-watch:tsc": "tsc -w",
-		"_ts-watch:compress": "onchange -f add -f change -v dist/ISBN.esm.js -- brotlin compress dist/ISBN.esm.js -m 1",
-		"_ts-watch:minify": "onchange -f add -f change -v dist/ISBN.esm.js -- terser dist/ISBN.esm.js -o dist/ISBN.min.esm.js -c ecma=2020 --mangle --ecma 2020 --module --source-map base=dist,filename=ISBN.esm.js,includeSources",
-		"_ts-watch:compress-minify": "onchange -f add -f change -v dist/ISBN.min.esm.js -- brotlin compress dist/ISBN.min.esm.js -m 1",
-		"_ts-watch:dts-minify": "onchange -f add -f change -v dist/ISBN.esm.d.ts -- cpy dist/ISBN.esm.d.ts dist --rename=ISBN.min.esm.d.ts",
-		"ts-watch": "run-p _ts-watch:*",
-		"test": "jest"
+	"publishConfig": {
+		"access": "public"
 	},
 	"jest": {
 		"transform": {
 			"\\.(js|mjs|ts)$": "babel-jest"
 		}
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/SaekiTominaga/isbn-verify.git"
-	},
-	"keywords": [
-		"ISBN"
-	],
-	"author": "Saeki Tominaga",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/SaekiTominaga/isbn-verify/issues"
-	},
-	"homepage": "https://github.com/SaekiTominaga/isbn-verify#readme",
-	"publishConfig": {
-		"access": "public"
 	}
 }

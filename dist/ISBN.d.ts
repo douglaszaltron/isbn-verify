@@ -63,4 +63,4 @@ export default class {
      */
     private _getCheckDigit10;
 }
-//# sourceMappingURL=ISBN.esm.d.ts.map
+//# sourceMappingURL=ISBN.d.ts.map

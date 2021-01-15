@@ -156,3 +156,4 @@ export default class {
     }
 }
 _isbn = new WeakMap(), _isbn13 = new WeakMap(), _isbn10 = new WeakMap();
+//# sourceMappingURL=ISBN.js.map

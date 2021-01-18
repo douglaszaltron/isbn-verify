@@ -5,8 +5,6 @@
 		"jest/globals": true
 	},
 	"extends": ["eslint:recommended"],
-	"globals": {
-	},
 	"plugins": ["jsdoc", "jest"],
 	"parserOptions": {
 		"ecmaVersion": 2021,

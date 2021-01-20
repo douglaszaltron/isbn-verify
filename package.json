@@ -55,7 +55,7 @@
 	},
 	"jest": {
 		"transform": {
-			"\\.(js|mjs|ts)$": "babel-jest"
+			"\\.(js|ts)$": "babel-jest"
 		}
 	}
 }

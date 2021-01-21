@@ -29,7 +29,7 @@
 		"_build:minify-compress": "onchange -f add -f change -v dist/ISBN.min.js -- brotlin compress dist/ISBN.min.js -m 1",
 		"_build:minify-declaration": "onchange -f add -f change -v dist/ISBN.d.ts -- cpy dist/ISBN.d.ts dist --rename=ISBN.min.d.ts",
 		"build": "run-p _build:*",
-		"test": "jest"
+		"test": "jest --coverage"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.10",

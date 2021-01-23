@@ -10,7 +10,7 @@ Verify ISBN string format and check digit.
 
 ## Examples
 
-```
+```JavaScript
 import ISBN from '@saekitominaga/isbn-verify';
 
 const isbn = new ISBN('978-4-06-519981-0');
@@ -21,7 +21,7 @@ isbn.verifyCheckDigit(); // false
 
 ## Constructor
 
-```
+```TypeScript
 new ISBN(isbn: string, strict = false)
 ```
 

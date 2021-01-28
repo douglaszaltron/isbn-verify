@@ -14,8 +14,10 @@ Verify ISBN string format and check digit.
 import ISBN from '@saekitominaga/isbn-verify';
 
 const isbn = new ISBN('978-4-06-519981-0');
-isbn.isValid(); // true
+isbn.isValid(); // false
+isbn.isIsbn10(); // false
 isbn.isIsbn13(); // true
+isbn.verifyFormat(); // true
 isbn.verifyCheckDigit(); // false
 ```
 

@@ -16,6 +16,7 @@
 		"src"
 	],
 	"type": "module",
+	"main": "dist/ISBN.js",
 	"module": "dist/ISBN.js",
 	"types": "dist/ISBN.d.ts",
 	"repository": {
@@ -24,10 +25,10 @@
 	},
 	"scripts": {
 		"_build:tsc": "tsc -w",
-		"_build:compress": "onchange -f add -f change -v dist/ISBN.js -- brotlin compress dist/ISBN.js -m 1",
-		"_build:minify": "onchange -f add -f change -v dist/ISBN.js -- terser dist/ISBN.js -o dist/ISBN.min.js -c ecma=2020 --mangle --ecma 2020 --module --source-map content='dist/ISBN.js.map',filename='ISBN.js',includeSources,url='ISBN.min.js.map'",
-		"_build:minify-compress": "onchange -f add -f change -v dist/ISBN.min.js -- brotlin compress dist/ISBN.min.js -m 1",
-		"_build:minify-declaration": "onchange -f add -f change -v dist/ISBN.d.ts -- cpy dist/ISBN.d.ts dist --rename=ISBN.min.d.ts",
+		"_build:compress": "onchange -f add -f change -v dist/ISBN.js -- brotlin compress {{file}} -m 1",
+		"_build:minify": "onchange -f add -f change -v dist/ISBN.js -- terser {{file}} -o {{fileDir}}/{{fileBaseNoExt}}.min.js -c ecma=2020 --mangle --ecma 2020 --module --source-map content='{{fileDir}}/{{fileBaseNoExt}}.js.map',filename='{{fileBaseNoExt}}.js',includeSources,url='{{fileBaseNoExt}}.min.js.map'",
+		"_build:minify-compress": "onchange -f add -f change -v dist/ISBN.min.js -- brotlin compress {{file}} -m 1",
+		"_build:minify-declaration": "onchange -f add -f change -v dist/ISBN.d.ts -- cpy {{file}} dist --rename=ISBN.min.d.ts",
 		"build": "run-p _build:*",
 		"test": "jest --coverage"
 	},

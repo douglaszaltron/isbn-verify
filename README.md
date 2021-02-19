@@ -1,6 +1,8 @@
 # ISBN Verify
 
 [![npm version](https://badge.fury.io/js/%40saekitominaga%2Fisbn-verify.svg)](https://badge.fury.io/js/%40saekitominaga%2Fisbn-verify)
+[![Build Status](https://www.travis-ci.com/SaekiTominaga/isbn-verify.svg)](https://www.travis-ci.com/SaekiTominaga/isbn-verify)
+[![Coverage Status](https://coveralls.io/repos/github/SaekiTominaga/isbn-verify/badge.svg)](https://coveralls.io/github/SaekiTominaga/isbn-verify)
 
 Verify ISBN string format and check digit.
 

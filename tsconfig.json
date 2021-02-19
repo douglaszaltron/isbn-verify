@@ -27,5 +27,5 @@
 		"forceConsistentCasingInFileNames": true,
 		"newLine": "LF"
 	},
-	"include": ["src/**/*.ts", "__tests__/*.ts"]
+	"include": ["src/**/*.ts"]
 }

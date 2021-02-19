@@ -35,15 +35,20 @@ new ISBN(isbn: string, strict = false)
 <dt>isbn</dt>
 <dd>ISBN value to check</dd>
 <dt>strict [Optional]</dt>
-<dd>Strict mode. If `true`, syntax without hyphens is an error. If not specified, it defaults to `false`.</dd>
+<dd>Strict mode. If `true`, syntax without hyphens is an error. If not specified, it defaults to `false`</dd>
 </dl>
 
 ## Methods
 
-| Name | Returns | Description |
-|-|-|-|
-| isValid() | {boolean} `true` if both format and check digit are correct | Alias of `verifyCheckDigit()` |
-| isIsbn13() | {boolean} `true` for current standard (13 digit) ISBN | Whether it is a 13-digit ISBN |
-| isIsbn10() | {boolean} `true` for old standard (10 digit) ISBN | Whether it is a 10-digit ISBN |
-| verifyFormat() | {boolean} `true` if the format is correct | Verify format (do not verify check digit) |
-| verifyCheckDigit() | {boolean} `true` if both format and check digit are correct | Verify format including check digit (not necessarily applicable publication |
+<dl>
+<dt>isValid(): boolean</dt>
+<dd>Alias of `verifyCheckDigit()`</dd>
+<dt>isIsbn13(): boolean</dt>
+<dd>Whether it is a 13-digit ISBN</dd>
+<dt>isIsbn10(): boolean</dt>
+<dd>Whether it is a 10-digit ISBN</dd>
+<dt>verifyFormat(): boolean</dt>
+<dd>Verify format (do not verify check digit)</dd>
+<dt>verifyCheckDigit(): boolean</dt>
+<dd>Verify format including check digit (not necessarily applicable publication)</dd>
+</dl>

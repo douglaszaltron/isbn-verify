@@ -1,7 +1,5 @@
 /**
  * ISBN
- *
- * @version 1.0.2
  */
 export default class {
 	#isbn: string;
@@ -9,8 +7,8 @@ export default class {
 	#isbn10 = false; // 旧規格（10桁）の ISBN か
 
 	/**
-	 * @param {string} isbn - チェックする ISBN の値
-	 * @param {boolean} strict - 厳格モード（true ならハイフンなしの構文はエラーとする）
+	 * @param {string} isbn - ISBN value to check
+	 * @param {boolean} strict - Strict mode. If `true`, syntax without hyphens is an error. If not specified, it defaults to `false`
 	 */
 	constructor(isbn: string, strict = false) {
 		this.#isbn = isbn;
@@ -29,45 +27,45 @@ export default class {
 	}
 
 	/**
-	 * verifyCheckDigit() のエイリアス
+	 * Alias of `verifyCheckDigit()`
 	 *
-	 * @returns {boolean} フォーマット、チェックデジットともに正しい場合は true
+	 * @returns {boolean} `true` if both format and check digit are correct
 	 */
 	isValid(): boolean {
 		return this.verifyCheckDigit();
 	}
 
 	/**
-	 * 13桁の ISBN か
+	 * Whether it is a 13-digit ISBN
 	 *
-	 * @returns {boolean} 現行規格（13桁）の ISBN なら true
+	 * @returns {boolean} `true` for current standard (13 digit) ISBN
 	 */
 	isIsbn13(): boolean {
 		return this.#isbn13;
 	}
 
 	/**
-	 * 10桁の ISBN か
+	 * Whether it is a 10-digit ISBN
 	 *
-	 * @returns {boolean} 旧規格（10桁）の ISBN なら true
+	 * @returns {boolean} `true` for old standard (10 digit) ISBN
 	 */
 	isIsbn10(): boolean {
 		return this.#isbn10;
 	}
 
 	/**
-	 * フォーマットを検証（チェックデジットの検証はしない）
+	 * Verify format (do not verify check digit)
 	 *
-	 * @returns {boolean} フォーマットが正しい場合は true
+	 * @returns {boolean} `true` if the format is correct
 	 */
 	verifyFormat(): boolean {
 		return this.#isbn13 || this.#isbn10;
 	}
 
 	/**
-	 * チェックデジットも含めてフォーマットを検証（該当する出版物が存在するとは限らない）
+	 * Verify format including check digit (not necessarily applicable publication)
 	 *
-	 * @returns {boolean} フォーマット、チェックデジットともに正しい場合は true
+	 * @returns {boolean} `true` if both format and check digit are correct
 	 */
 	verifyCheckDigit(): boolean {
 		if (this.#isbn13) {

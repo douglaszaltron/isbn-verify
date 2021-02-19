@@ -1,6 +1,6 @@
 {
 	"name": "@saekitominaga/isbn-verify",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "Verify ISBN string format and check digit.",
 	"keywords": [
 		"ISBN"

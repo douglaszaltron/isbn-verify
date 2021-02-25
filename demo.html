@@ -62,7 +62,7 @@
 			}
 		</style>
 		<script type="module">
-			import ISBN from './dist/ISBN.js';
+			import IsbnVerify from './dist/ISBN.js';
 
 			const inputElement = document.getElementById('isbn-input');
 			const strictElement = document.getElementById('isbn-strict');
@@ -82,17 +82,17 @@
 			checkButtonElement.addEventListener(
 				'click',
 				() => {
-					const isbn = new ISBN(inputElement.value, strictElement.checked);
+					const isbnVerify = new IsbnVerify(inputElement.value, strictElement.checked);
 
-					const format = isbn.verifyFormat();
+					const format = isbnVerify.verifyFormat();
 					formatSeccessElement.hidden = !format;
 					formatFailElement.hidden = format;
 
 					if (format) {
-						digits13Element.hidden = !isbn.isIsbn13();
-						digits10Element.hidden = !isbn.isIsbn10();
+						digits13Element.hidden = !isbnVerify.isIsbn13();
+						digits10Element.hidden = !isbnVerify.isIsbn10();
 
-						const checkDigit = isbn.verifyCheckDigit();
+						const checkDigit = isbnVerify.verifyCheckDigit();
 						cdSeccessElement.hidden = !checkDigit;
 						cdFailElement.hidden = checkDigit;
 					} else {

@@ -13,20 +13,20 @@ Verify ISBN string format and check digit.
 ## Examples
 
 ```JavaScript
-import ISBN from '@saekitominaga/isbn-verify';
+import IsbnVerify from '@saekitominaga/isbn-verify';
 
-const isbn = new ISBN('978-4-06-519981-0');
-isbn.isValid(); // false
-isbn.isIsbn10(); // false
-isbn.isIsbn13(); // true
-isbn.verifyFormat(); // true
-isbn.verifyCheckDigit(); // false
+const isbnVerify = new IsbnVerify('978-4-06-519981-0');
+isbnVerify.isValid(); // false
+isbnVerify.isIsbn10(); // false
+isbnVerify.isIsbn13(); // true
+isbnVerify.verifyFormat(); // true
+isbnVerify.verifyCheckDigit(); // false
 ```
 
 ## Constructor
 
 ```TypeScript
-new ISBN(isbn: string, strict = false)
+new IsbnVerify(isbn: string, strict = false)
 ```
 
 ### Parameters

@@ -20,6 +20,26 @@ describe('ISBN-13（ハイフンあり）', () => {
 	});
 });
 
+describe('ISBN-13（ハイフンあり・Strictモード）', () => {
+	const isbn = new ISBN('978-4-06-519981-7', true);
+
+	test('正当', () => {
+		expect(isbn.isValid()).toBeTruthy();
+	});
+	test('13桁', () => {
+		expect(isbn.isIsbn13()).toBeTruthy();
+	});
+	test('10桁', () => {
+		expect(isbn.isIsbn10()).toBeFalsy();
+	});
+	test('フォーマット', () => {
+		expect(isbn.verifyFormat()).toBeTruthy();
+	});
+	test('チェックデジット', () => {
+		expect(isbn.verifyCheckDigit()).toBeTruthy();
+	});
+});
+
 describe('ISBN-13（ハイフンなし）', () => {
 	const isbn = new ISBN('9784065199817');
 
@@ -40,8 +60,48 @@ describe('ISBN-13（ハイフンなし）', () => {
 	});
 });
 
+describe('ISBN-13（ハイフンなし・Strictモード）', () => {
+	const isbn = new ISBN('9784065199817', true);
+
+	test('正当', () => {
+		expect(isbn.isValid()).toBeFalsy();
+	});
+	test('13桁', () => {
+		expect(isbn.isIsbn13()).toBeFalsy();
+	});
+	test('10桁', () => {
+		expect(isbn.isIsbn10()).toBeFalsy();
+	});
+	test('フォーマット', () => {
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('チェックデジット', () => {
+		expect(isbn.verifyCheckDigit()).toBeFalsy();
+	});
+});
+
 describe('ISBN-10（ハイフンあり）', () => {
 	const isbn = new ISBN('4-06-519981-6');
+
+	test('正当', () => {
+		expect(isbn.isValid()).toBeTruthy();
+	});
+	test('13桁', () => {
+		expect(isbn.isIsbn13()).toBeFalsy();
+	});
+	test('10桁', () => {
+		expect(isbn.isIsbn10()).toBeTruthy();
+	});
+	test('フォーマット', () => {
+		expect(isbn.verifyFormat()).toBeTruthy();
+	});
+	test('チェックデジット', () => {
+		expect(isbn.verifyCheckDigit()).toBeTruthy();
+	});
+});
+
+describe('ISBN-10（ハイフンあり・Strictモード）', () => {
+	const isbn = new ISBN('4-06-519981-6', true);
 
 	test('正当', () => {
 		expect(isbn.isValid()).toBeTruthy();
@@ -77,6 +137,26 @@ describe('ISBN-10（ハイフンなし）', () => {
 	});
 	test('チェックデジット', () => {
 		expect(isbn.verifyCheckDigit()).toBeTruthy();
+	});
+});
+
+describe('ISBN-10（ハイフンなし・Strictモード）', () => {
+	const isbn = new ISBN('4065199816', true);
+
+	test('正当', () => {
+		expect(isbn.isValid()).toBeFalsy();
+	});
+	test('13桁', () => {
+		expect(isbn.isIsbn13()).toBeFalsy();
+	});
+	test('10桁', () => {
+		expect(isbn.isIsbn10()).toBeFalsy();
+	});
+	test('フォーマット', () => {
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('チェックデジット', () => {
+		expect(isbn.verifyCheckDigit()).toBeFalsy();
 	});
 });
 

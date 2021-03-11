@@ -240,6 +240,57 @@ describe('ISBN-10（ハイフンなし）、チェックデジットが違う', 
 	});
 });
 
+describe('ハイフンのパターン', () => {
+	test('ISBN-13（ハイフン中途半端）', () => {
+		const isbn = new ISBN('978-4065199817');
+		expect(isbn.isIsbn13()).toBeTruthy();
+	});
+	test('ISBN-13（ハイフン中途半端・Strictモード）', () => {
+		const isbn = new ISBN('978-4065199817', true);
+		expect(isbn.isIsbn13()).toBeFalsy();
+	});
+	test('ISBN-13（先頭ハイフン）', () => {
+		const isbn = new ISBN('-9784065199817');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('ISBN-13（末尾ハイフン）', () => {
+		const isbn = new ISBN('978-4065199817-');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('ISBN-13（連続ハイフン）', () => {
+		const isbn = new ISBN('978--4065199817');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('ISBN-13（ハイフン多すぎ）', () => {
+		const isbn = new ISBN('978-4-06-519-981-7');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('ISBN-10（ハイフン中途半端）', () => {
+		const isbn = new ISBN('406-5199816');
+		expect(isbn.isIsbn10()).toBeTruthy();
+	});
+	test('ISBN-10（ハイフン中途半端・Strictモード）', () => {
+		const isbn = new ISBN('406-5199816', true);
+		expect(isbn.isIsbn10()).toBeFalsy();
+	});
+	test('ISBN-10（先頭ハイフン）', () => {
+		const isbn = new ISBN('-4065199816');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('ISBN-10（末尾ハイフン）', () => {
+		const isbn = new ISBN('4065199816-');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('ISBN-10（連続ハイフン）', () => {
+		const isbn = new ISBN('406--5199816');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+	test('ISBN-10（ハイフン多すぎ）', () => {
+		const isbn = new ISBN('4-06-519-981-6');
+		expect(isbn.verifyFormat()).toBeFalsy();
+	});
+});
+
 describe('いろいろな文字列を入れてみる', () => {
 	test('13桁のチェックデジットが 0', () => {
 		const isbn = new ISBN('978-4-8356-3517-0');

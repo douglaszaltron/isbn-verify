@@ -2,7 +2,7 @@
  * ISBN
  */
 export default class {
-	#isbn: string;
+	#isbnNoHyphens: string; // ハイフンなしの ISBN
 	#isbn13 = false; // 現行規格（13桁）の ISBN か
 	#isbn10 = false; // 旧規格（10桁）の ISBN か
 
@@ -11,18 +11,29 @@ export default class {
 	 * @param {boolean} strict - Strict mode. If `true`, syntax without hyphens is an error. If not specified, it defaults to `false`
 	 */
 	constructor(isbn: string, strict = false) {
-		this.#isbn = isbn;
+		const isbnNoHyphens = isbn.replace(/-/g, '');
+		this.#isbnNoHyphens = isbnNoHyphens;
 
-		const length = isbn.length;
+		if (strict) {
+			const length = isbn.length;
 
-		if (length === 17 && /^(978|979)-\d{1,5}-\d{1,7}-\d{1,7}-\d$/.test(isbn)) {
-			this.#isbn13 = true;
-		} else if (/^\d{13}$/.test(isbn)) {
-			this.#isbn13 = !strict;
-		} else if (length === 13 && /^\d{1,5}-\d{1,7}-\d{1,7}-[\dX]$/.test(isbn)) {
-			this.#isbn10 = true;
-		} else if (/^\d{9}[\dX]$/.test(isbn)) {
-			this.#isbn10 = !strict;
+			if (length === 17 && /^(978|979)-\d{1,5}-\d{1,7}-\d{1,7}-\d$/.test(isbn)) {
+				this.#isbn13 = true;
+			} else if (length === 13 && /^\d{1,5}-\d{1,7}-\d{1,7}-[\dX]$/.test(isbn)) {
+				this.#isbn10 = true;
+			}
+		} else {
+			if (!isbn.includes('--')) {
+				if (/^(978|979)\d{10}$/.test(isbnNoHyphens)) {
+					if (/^\d[\d-]{11,15}\d$/.test(isbn)) {
+						this.#isbn13 = true;
+					}
+				} else if (/^\d{9}[\dX]$/.test(isbnNoHyphens)) {
+					if (/^\d[\d-]{8,11}[\dX]$/.test(isbn)) {
+						this.#isbn10 = true;
+					}
+				}
+			}
 		}
 	}
 
@@ -69,37 +80,22 @@ export default class {
 	 */
 	verifyCheckDigit(): boolean {
 		if (this.#isbn13) {
-			/* ISBN-13 */
-			const isbnNoHyphens = this._getNoHyphens();
-
-			return isbnNoHyphens.substring(12) === this._getCheckDigit13(isbnNoHyphens);
+			return this.#isbnNoHyphens.substring(12) === this._getCheckDigit13();
 		} else if (this.#isbn10) {
-			/* ISBN-10 */
-			const isbnNoHyphens = this._getNoHyphens();
-
-			return isbnNoHyphens.substring(9) === this._getCheckDigit10(isbnNoHyphens);
+			return this.#isbnNoHyphens.substring(9) === this._getCheckDigit10();
 		}
 
 		return false;
 	}
 
 	/**
-	 * ハイフンなしの ISBN を取得する
-	 *
-	 * @returns {string} ハイフンなしの ISBN
-	 */
-	private _getNoHyphens(): string {
-		return this.#isbn.replace(/-/g, '');
-	}
-
-	/**
 	 * ISBN-13 のチェックデジットを取得する
-	 *
-	 * @param {string} isbnNoHyphens - ハイフンなしの ISBN
 	 *
 	 * @returns {string} チェックデジット
 	 */
-	private _getCheckDigit13(isbnNoHyphens: string): string {
+	private _getCheckDigit13(): string {
+		const isbnNoHyphens = this.#isbnNoHyphens;
+
 		const checkDigit = String(
 			10 -
 				((Number(isbnNoHyphens.substring(0, 1)) +
@@ -128,11 +124,11 @@ export default class {
 	/**
 	 * ISBN-10 のチェックデジットを取得する
 	 *
-	 * @param {string} isbnNoHyphens - ハイフンなしの ISBN
-	 *
 	 * @returns {string} チェックデジット
 	 */
-	private _getCheckDigit10(isbnNoHyphens: string): string {
+	private _getCheckDigit10(): string {
+		const isbnNoHyphens = this.#isbnNoHyphens;
+
 		const checkDigit = String(
 			11 -
 				((Number(isbnNoHyphens.substring(0, 1)) * 10 +

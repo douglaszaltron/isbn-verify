@@ -39,23 +39,13 @@ export default class {
      */
     verifyCheckDigit(): boolean;
     /**
-     * ハイフンなしの ISBN を取得する
-     *
-     * @returns {string} ハイフンなしの ISBN
-     */
-    private _getNoHyphens;
-    /**
      * ISBN-13 のチェックデジットを取得する
-     *
-     * @param {string} isbnNoHyphens - ハイフンなしの ISBN
      *
      * @returns {string} チェックデジット
      */
     private _getCheckDigit13;
     /**
      * ISBN-10 のチェックデジットを取得する
-     *
-     * @param {string} isbnNoHyphens - ハイフンなしの ISBN
      *
      * @returns {string} チェックデジット
      */

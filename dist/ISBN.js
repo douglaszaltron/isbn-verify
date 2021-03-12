@@ -13,7 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _isbnNoHyphens, _isbn13, _isbn10;
 /**
- * ISBN
+ * ISBN Verify
  */
 export default class {
     /**

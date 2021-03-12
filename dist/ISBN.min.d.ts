@@ -2,7 +2,7 @@ interface isOption {
     check_digit?: boolean;
 }
 /**
- * ISBN
+ * ISBN Verify
  */
 export default class {
     #private;

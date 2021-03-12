@@ -3,7 +3,7 @@ interface isOption {
 }
 
 /**
- * ISBN
+ * ISBN Verify
  */
 export default class {
 	#isbnNoHyphens: string; // ハイフンなしの ISBN

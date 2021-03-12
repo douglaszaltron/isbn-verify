@@ -41,11 +41,15 @@ export default class {
     /**
      * ISBN-13 のチェックデジットを取得する
      *
+     * @param {string} isbnNoHyphens - ハイフンなしの ISBN
+     *
      * @returns {string} チェックデジット
      */
     private _getCheckDigit13;
     /**
      * ISBN-10 のチェックデジットを取得する
+     *
+     * @param {string} isbnNoHyphens - ハイフンなしの ISBN
      *
      * @returns {string} チェックデジット
      */

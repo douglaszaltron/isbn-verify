@@ -89,20 +89,23 @@ export default class {
      */
     verifyCheckDigit() {
         if (__classPrivateFieldGet(this, _isbn13)) {
-            return __classPrivateFieldGet(this, _isbnNoHyphens).substring(12) === this._getCheckDigit13();
+            const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens);
+            return isbnNoHyphens.substring(12) === this._getCheckDigit13(isbnNoHyphens);
         }
         else if (__classPrivateFieldGet(this, _isbn10)) {
-            return __classPrivateFieldGet(this, _isbnNoHyphens).substring(9) === this._getCheckDigit10();
+            const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens);
+            return isbnNoHyphens.substring(9) === this._getCheckDigit10(isbnNoHyphens);
         }
         return false;
     }
     /**
      * ISBN-13 のチェックデジットを取得する
      *
+     * @param {string} isbnNoHyphens - ハイフンなしの ISBN
+     *
      * @returns {string} チェックデジット
      */
-    _getCheckDigit13() {
-        const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens);
+    _getCheckDigit13(isbnNoHyphens) {
         const checkDigit = String(10 -
             ((Number(isbnNoHyphens.substring(0, 1)) +
                 Number(isbnNoHyphens.substring(1, 2)) * 3 +
@@ -126,10 +129,11 @@ export default class {
     /**
      * ISBN-10 のチェックデジットを取得する
      *
+     * @param {string} isbnNoHyphens - ハイフンなしの ISBN
+     *
      * @returns {string} チェックデジット
      */
-    _getCheckDigit10() {
-        const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens);
+    _getCheckDigit10(isbnNoHyphens) {
         const checkDigit = String(11 -
             ((Number(isbnNoHyphens.substring(0, 1)) * 10 +
                 Number(isbnNoHyphens.substring(1, 2)) * 9 +

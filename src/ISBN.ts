@@ -80,9 +80,11 @@ export default class {
 	 */
 	verifyCheckDigit(): boolean {
 		if (this.#isbn13) {
-			return this.#isbnNoHyphens.substring(12) === this._getCheckDigit13();
+			const isbnNoHyphens = this.#isbnNoHyphens;
+			return isbnNoHyphens.substring(12) === this._getCheckDigit13(isbnNoHyphens);
 		} else if (this.#isbn10) {
-			return this.#isbnNoHyphens.substring(9) === this._getCheckDigit10();
+			const isbnNoHyphens = this.#isbnNoHyphens;
+			return isbnNoHyphens.substring(9) === this._getCheckDigit10(isbnNoHyphens);
 		}
 
 		return false;
@@ -91,11 +93,11 @@ export default class {
 	/**
 	 * ISBN-13 のチェックデジットを取得する
 	 *
+	 * @param {string} isbnNoHyphens - ハイフンなしの ISBN
+	 *
 	 * @returns {string} チェックデジット
 	 */
-	private _getCheckDigit13(): string {
-		const isbnNoHyphens = this.#isbnNoHyphens;
-
+	private _getCheckDigit13(isbnNoHyphens: string): string {
 		const checkDigit = String(
 			10 -
 				((Number(isbnNoHyphens.substring(0, 1)) +
@@ -124,11 +126,11 @@ export default class {
 	/**
 	 * ISBN-10 のチェックデジットを取得する
 	 *
+	 * @param {string} isbnNoHyphens - ハイフンなしの ISBN
+	 *
 	 * @returns {string} チェックデジット
 	 */
-	private _getCheckDigit10(): string {
-		const isbnNoHyphens = this.#isbnNoHyphens;
-
+	private _getCheckDigit10(isbnNoHyphens: string): string {
 		const checkDigit = String(
 			11 -
 				((Number(isbnNoHyphens.substring(0, 1)) * 10 +

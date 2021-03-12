@@ -1,3 +1,6 @@
+interface isOption {
+    check_digit?: boolean;
+}
 /**
  * ISBN
  */
@@ -17,15 +20,19 @@ export default class {
     /**
      * Whether it is a 13-digit ISBN
      *
+     * @param {isOption} options - Specifies characteristics about the check item.
+     *
      * @returns {boolean} `true` for current standard (13 digit) ISBN
      */
-    isIsbn13(): boolean;
+    isIsbn13(options?: isOption): boolean;
     /**
      * Whether it is a 10-digit ISBN
      *
+     * @param {isOption} options - Specifies characteristics about the check item.
+     *
      * @returns {boolean} `true` for old standard (10 digit) ISBN
      */
-    isIsbn10(): boolean;
+    isIsbn10(options?: isOption): boolean;
     /**
      * Verify format (do not verify check digit)
      *
@@ -55,4 +62,5 @@ export default class {
      */
     private _getCheckDigit10;
 }
+export {};
 //# sourceMappingURL=ISBN.d.ts.map

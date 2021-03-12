@@ -9,6 +9,9 @@ describe('ISBN-13（ハイフンあり）', () => {
 	test('13桁', () => {
 		expect(isbn.isIsbn13()).toBeTruthy();
 	});
+	test('13桁・チェックデジット', () => {
+		expect(isbn.isIsbn13({ check_digit: true })).toBeTruthy();
+	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeFalsy();
 	});
@@ -28,6 +31,9 @@ describe('ISBN-13（ハイフンあり・Strictモード）', () => {
 	});
 	test('13桁', () => {
 		expect(isbn.isIsbn13()).toBeTruthy();
+	});
+	test('13桁・チェックデジット', () => {
+		expect(isbn.isIsbn13({ check_digit: true })).toBeTruthy();
 	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeFalsy();
@@ -49,6 +55,9 @@ describe('ISBN-13（ハイフンなし）', () => {
 	test('13桁', () => {
 		expect(isbn.isIsbn13()).toBeTruthy();
 	});
+	test('13桁・チェックデジット', () => {
+		expect(isbn.isIsbn13({ check_digit: true })).toBeTruthy();
+	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeFalsy();
 	});
@@ -68,6 +77,9 @@ describe('ISBN-13（ハイフンなし・Strictモード）', () => {
 	});
 	test('13桁', () => {
 		expect(isbn.isIsbn13()).toBeFalsy();
+	});
+	test('13桁・チェックデジット', () => {
+		expect(isbn.isIsbn13({ check_digit: true })).toBeFalsy();
 	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeFalsy();
@@ -92,6 +104,9 @@ describe('ISBN-10（ハイフンあり）', () => {
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeTruthy();
 	});
+	test('10桁・チェックデジット', () => {
+		expect(isbn.isIsbn10({ check_digit: true })).toBeTruthy();
+	});
 	test('フォーマット', () => {
 		expect(isbn.verifyFormat()).toBeTruthy();
 	});
@@ -111,6 +126,9 @@ describe('ISBN-10（ハイフンあり・Strictモード）', () => {
 	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeTruthy();
+	});
+	test('10桁・チェックデジット', () => {
+		expect(isbn.isIsbn10({ check_digit: true })).toBeTruthy();
 	});
 	test('フォーマット', () => {
 		expect(isbn.verifyFormat()).toBeTruthy();
@@ -132,6 +150,9 @@ describe('ISBN-10（ハイフンなし）', () => {
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeTruthy();
 	});
+	test('10桁・チェックデジット', () => {
+		expect(isbn.isIsbn10({ check_digit: true })).toBeTruthy();
+	});
 	test('フォーマット', () => {
 		expect(isbn.verifyFormat()).toBeTruthy();
 	});
@@ -152,6 +173,9 @@ describe('ISBN-10（ハイフンなし・Strictモード）', () => {
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeFalsy();
 	});
+	test('10桁・チェックデジット', () => {
+		expect(isbn.isIsbn10({ check_digit: true })).toBeFalsy();
+	});
 	test('フォーマット', () => {
 		expect(isbn.verifyFormat()).toBeFalsy();
 	});
@@ -168,6 +192,9 @@ describe('ISBN-13（ハイフンあり）、チェックデジットが違う', 
 	});
 	test('13桁', () => {
 		expect(isbn.isIsbn13()).toBeTruthy();
+	});
+	test('13桁・チェックデジット', () => {
+		expect(isbn.isIsbn13({ check_digit: true })).toBeFalsy();
 	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeFalsy();
@@ -188,6 +215,9 @@ describe('ISBN-13（ハイフンなし）、チェックデジットが違う', 
 	});
 	test('13桁', () => {
 		expect(isbn.isIsbn13()).toBeTruthy();
+	});
+	test('13桁・チェックデジット', () => {
+		expect(isbn.isIsbn13({ check_digit: true })).toBeFalsy();
 	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeFalsy();
@@ -212,6 +242,9 @@ describe('ISBN-10（ハイフンあり）、チェックデジットが違う', 
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeTruthy();
 	});
+	test('10桁・チェックデジット', () => {
+		expect(isbn.isIsbn10({ check_digit: true })).toBeFalsy();
+	});
 	test('フォーマット', () => {
 		expect(isbn.verifyFormat()).toBeTruthy();
 	});
@@ -231,6 +264,9 @@ describe('ISBN-10（ハイフンなし）、チェックデジットが違う', 
 	});
 	test('10桁', () => {
 		expect(isbn.isIsbn10()).toBeTruthy();
+	});
+	test('10桁・チェックデジット', () => {
+		expect(isbn.isIsbn10({ check_digit: true })).toBeFalsy();
 	});
 	test('フォーマット', () => {
 		expect(isbn.verifyFormat()).toBeTruthy();

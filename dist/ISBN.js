@@ -61,17 +61,27 @@ export default class {
     /**
      * Whether it is a 13-digit ISBN
      *
+     * @param {isOption} options - Specifies characteristics about the check item.
+     *
      * @returns {boolean} `true` for current standard (13 digit) ISBN
      */
-    isIsbn13() {
+    isIsbn13(options) {
+        if (options !== undefined && options.check_digit) {
+            return __classPrivateFieldGet(this, _isbn13) && this.verifyCheckDigit();
+        }
         return __classPrivateFieldGet(this, _isbn13);
     }
     /**
      * Whether it is a 10-digit ISBN
      *
+     * @param {isOption} options - Specifies characteristics about the check item.
+     *
      * @returns {boolean} `true` for old standard (10 digit) ISBN
      */
-    isIsbn10() {
+    isIsbn10(options) {
+        if (options !== undefined && options.check_digit) {
+            return __classPrivateFieldGet(this, _isbn10) && this.verifyCheckDigit();
+        }
         return __classPrivateFieldGet(this, _isbn10);
     }
     /**

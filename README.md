@@ -33,24 +33,24 @@ new IsbnVerify(isbn: string, strict = false)
 ### Parameters
 
 <dl>
-<dt>`isbn`</dt>
+<dt><code>isbn</code></dt>
 <dd>ISBN value to check</dd>
-<dt>`strict` [Optional]</dt>
+<dt><code>strict` [Optional]</dt>
 <dd>Strict mode. If `true`, syntax without hyphens is an error. If not specified, it defaults to `false`</dd>
 </dl>
 
 ## Methods
 
 <dl>
-<dt>`isValid(): boolean`</dt>
+<dt><code>isValid(): boolean</code></dt>
 <dd>Alias of `verifyCheckDigit()`</dd>
-<dt>`isIsbn13(options?: isOption): boolean`</dt>
+<dt><code>isIsbn13(options?: isOption): boolean</code></dt>
 <dd>Whether it is a 13-digit ISBN</dd>
-<dt>`isIsbn10(options?: isOption): boolean`</dt>
+<dt><code>isIsbn10(options?: isOption): boolean</code></dt>
 <dd>Whether it is a 10-digit ISBN</dd>
-<dt>`verifyFormat(): boolean`</dt>
+<dt><code>verifyFormat(): boolean</code></dt>
 <dd>Verify format (do not verify check digit)</dd>
-<dt>`verifyCheckDigit(): boolean`</dt>
+<dt><code>verifyCheckDigit(): boolean</code></dt>
 <dd>Verify format including check digit (not necessarily applicable publication)</dd>
 </dl>
 

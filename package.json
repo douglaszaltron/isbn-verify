@@ -15,7 +15,6 @@
 		"dist",
 		"src"
 	],
-	"type": "module",
 	"main": "dist/ISBN.js",
 	"module": "dist/ISBN.js",
 	"types": "dist/ISBN.d.ts",

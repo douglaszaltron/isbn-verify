@@ -1,15 +1,13 @@
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _isbnNoHyphens, _isbn13, _isbn10;
 /**
@@ -25,26 +23,26 @@ export default class {
         _isbn13.set(this, false); // 現行規格（13桁）の ISBN か
         _isbn10.set(this, false); // 旧規格（10桁）の ISBN か
         const isbnNoHyphens = isbn.replace(/-/g, '');
-        __classPrivateFieldSet(this, _isbnNoHyphens, isbnNoHyphens);
+        __classPrivateFieldSet(this, _isbnNoHyphens, isbnNoHyphens, "f");
         if (strict) {
             const length = isbn.length;
             if (length === 17 && /^(978|979)-\d{1,5}-\d{1,7}-\d{1,7}-\d$/.test(isbn)) {
-                __classPrivateFieldSet(this, _isbn13, true);
+                __classPrivateFieldSet(this, _isbn13, true, "f");
             }
             else if (length === 13 && /^\d{1,5}-\d{1,7}-\d{1,7}-[\dX]$/.test(isbn)) {
-                __classPrivateFieldSet(this, _isbn10, true);
+                __classPrivateFieldSet(this, _isbn10, true, "f");
             }
         }
         else {
             if (!isbn.includes('--')) {
                 if (/^(978|979)\d{10}$/.test(isbnNoHyphens)) {
                     if (/^\d[\d-]{11,15}\d$/.test(isbn)) {
-                        __classPrivateFieldSet(this, _isbn13, true);
+                        __classPrivateFieldSet(this, _isbn13, true, "f");
                     }
                 }
                 else if (/^\d{9}[\dX]$/.test(isbnNoHyphens)) {
                     if (/^\d[\d-]{8,11}[\dX]$/.test(isbn)) {
-                        __classPrivateFieldSet(this, _isbn10, true);
+                        __classPrivateFieldSet(this, _isbn10, true, "f");
                     }
                 }
             }
@@ -67,9 +65,9 @@ export default class {
      */
     isIsbn13(options) {
         if (options !== undefined && options.check_digit) {
-            return __classPrivateFieldGet(this, _isbn13) && this.verifyCheckDigit();
+            return __classPrivateFieldGet(this, _isbn13, "f") && this.verifyCheckDigit();
         }
-        return __classPrivateFieldGet(this, _isbn13);
+        return __classPrivateFieldGet(this, _isbn13, "f");
     }
     /**
      * Whether it is a 10-digit ISBN
@@ -80,9 +78,9 @@ export default class {
      */
     isIsbn10(options) {
         if (options !== undefined && options.check_digit) {
-            return __classPrivateFieldGet(this, _isbn10) && this.verifyCheckDigit();
+            return __classPrivateFieldGet(this, _isbn10, "f") && this.verifyCheckDigit();
         }
-        return __classPrivateFieldGet(this, _isbn10);
+        return __classPrivateFieldGet(this, _isbn10, "f");
     }
     /**
      * Verify format (do not verify check digit)
@@ -90,7 +88,7 @@ export default class {
      * @returns {boolean} `true` if the format is correct
      */
     verifyFormat() {
-        return __classPrivateFieldGet(this, _isbn13) || __classPrivateFieldGet(this, _isbn10);
+        return __classPrivateFieldGet(this, _isbn13, "f") || __classPrivateFieldGet(this, _isbn10, "f");
     }
     /**
      * Verify format including check digit (not necessarily applicable publication)
@@ -98,12 +96,12 @@ export default class {
      * @returns {boolean} `true` if both format and check digit are correct
      */
     verifyCheckDigit() {
-        if (__classPrivateFieldGet(this, _isbn13)) {
-            const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens);
+        if (__classPrivateFieldGet(this, _isbn13, "f")) {
+            const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens, "f");
             return isbnNoHyphens.substring(12) === this._getCheckDigit13(isbnNoHyphens);
         }
-        else if (__classPrivateFieldGet(this, _isbn10)) {
-            const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens);
+        else if (__classPrivateFieldGet(this, _isbn10, "f")) {
+            const isbnNoHyphens = __classPrivateFieldGet(this, _isbnNoHyphens, "f");
             return isbnNoHyphens.substring(9) === this._getCheckDigit10(isbnNoHyphens);
         }
         return false;

@@ -1,6 +1,6 @@
 {
-	"name": "@saekitominaga/isbn-verify",
-	"version": "1.4.1",
+	"name": "@shippack/isbn-verify",
+	"version": "1.4.2",
 	"description": "Verify ISBN string format and check digit.",
 	"keywords": [
 		"ISBN"

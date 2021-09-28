@@ -1,4 +1,4 @@
-import ISBN from '../src/ISBN';
+import ISBN from '../src';
 
 describe('ISBN-13（ハイフンあり）', () => {
 	const isbn = new ISBN('978-4-06-519981-7');

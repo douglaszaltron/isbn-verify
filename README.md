@@ -35,7 +35,7 @@ new IsbnVerify(isbn: string, strict = false)
 <dl>
 <dt><code>isbn</code></dt>
 <dd>ISBN value to check</dd>
-<dt><code>strict` [Optional]</dt>
+<dt><code>strict</code> [Optional]</dt>
 <dd>Strict mode. If `true`, syntax without hyphens is an error. If not specified, it defaults to `false`</dd>
 </dl>
 
